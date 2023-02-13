@@ -2,7 +2,7 @@ package br.com.nyexgaming.sdk.endpoints.transactions;
 
 public enum TransactionStatus {
 
-    PENDING(0), PAID(1), DELIVERED(2), REVERSED(3), FAIL(4);
+    PENDING(0), PAID(1), REVERSED(2), FAIL(3);
 
     public final int statusCode;
 

@@ -18,18 +18,21 @@ public class NyexGaming {
         this.http = new HTTPUtils(storeId, serverId);
     }
 
+    @Deprecated
     public Category[] getCategories() throws NetworkErrorException, RequestFailedException, TokenFailureException {
         String content = this.http.GET("https://api.nyexgaming.com.br/v1/ps/categorias/");
 
         return new Gson().fromJson(content, Category[].class);
     }
 
+    @Deprecated
     public Category getCategoryById(long categoryId) throws NetworkErrorException, RequestFailedException, TokenFailureException {
         String content = this.http.GET("https://api.nyexgaming.com.br/v1/ps/categorias/" + categoryId);
 
         return new Gson().fromJson(content, Category.class);
     }
 
+    @Deprecated
     public Product getProductById(long categoryId, long productId) throws NetworkErrorException, RequestFailedException, TokenFailureException {
         String content = this.http.GET("https://api.nyexgaming.com.br/v1/ps/categorias/" + categoryId + "/" + productId);
 
@@ -66,8 +69,11 @@ public class NyexGaming {
         return new Gson().fromJson(content, Transaction[].class);
     }
 
-    public void update(Transaction transaction) throws NetworkErrorException, RequestFailedException, TokenFailureException {
-        this.http.POST("https://api.nyexgaming.com.br/v1/ps/transacoes/" + transaction.id_transacao, new Gson().toJson(transaction));
+    public String update(Transaction transaction) throws NetworkErrorException, RequestFailedException, TokenFailureException {
+        return this.http.POST(
+                "https://api.nyexgaming.com.br/v1/ps/transacoes/" + transaction.id_transacao,
+                new Gson().toJson(transaction)
+        );
     }
 
     public HTTPUtils getHttp() {

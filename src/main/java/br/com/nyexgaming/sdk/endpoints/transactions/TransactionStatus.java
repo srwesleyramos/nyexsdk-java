@@ -17,6 +17,6 @@ public enum TransactionStatus {
             }
         }
 
-        return null;
+        return FAIL;
     }
 }

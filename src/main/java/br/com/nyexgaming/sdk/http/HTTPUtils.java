@@ -35,7 +35,7 @@ public class HTTPUtils {
                 return readHttpContent(request.getInputStream());
             }
 
-            if (request.getResponseCode() == HttpURLConnection.HTTP_UNAUTHORIZED) {
+            if (request.getResponseCode() == HttpURLConnection.HTTP_UNAUTHORIZED || request.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND) {
                 throw new TokenFailureException("the provided token is invalid");
             }
 
@@ -68,7 +68,7 @@ public class HTTPUtils {
                 return readHttpContent(request.getInputStream());
             }
 
-            if (request.getResponseCode() == HttpURLConnection.HTTP_UNAUTHORIZED) {
+            if (request.getResponseCode() == HttpURLConnection.HTTP_UNAUTHORIZED || request.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND) {
                 throw new TokenFailureException("the provided token is invalid");
             }
 

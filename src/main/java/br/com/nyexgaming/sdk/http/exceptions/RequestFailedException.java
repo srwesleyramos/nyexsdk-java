@@ -5,7 +5,7 @@ public class RequestFailedException extends Exception {
     private final int responseCode;
 
     public RequestFailedException(String message, int responseCode) {
-        super(message);
+        super(message + " (" + responseCode + ")");
 
         this.responseCode = responseCode;
     }

@@ -27,7 +27,8 @@ public class HTTPUtils {
             request.setRequestProperty("store-id-authorization", this.storeId);
             request.setRequestProperty("server-id-authorization", this.serverId);
             request.setRequestProperty("Content-Type", "application/json");
-            request.setRequestProperty("X-HTTP-Method-Override", "GET");
+
+            request.setRequestMethod("GET");
 
             request.connect();
 
@@ -35,7 +36,7 @@ public class HTTPUtils {
                 return readHttpContent(request.getInputStream());
             }
 
-            if (request.getResponseCode() == HttpURLConnection.HTTP_UNAUTHORIZED || request.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND) {
+            if (request.getResponseCode() == HttpURLConnection.HTTP_UNAUTHORIZED || request.getResponseCode() == HttpURLConnection.HTTP_FORBIDDEN) {
                 throw new TokenFailureException("the provided token is invalid");
             }
 
@@ -56,7 +57,8 @@ public class HTTPUtils {
             request.setRequestProperty("store-id-authorization", this.storeId);
             request.setRequestProperty("server-id-authorization", this.serverId);
             request.setRequestProperty("Content-Type", "application/json");
-            request.setRequestProperty("X-HTTP-Method-Override", "POST");
+
+            request.setRequestMethod("POST");
 
             request.connect();
 
@@ -68,7 +70,7 @@ public class HTTPUtils {
                 return readHttpContent(request.getInputStream());
             }
 
-            if (request.getResponseCode() == HttpURLConnection.HTTP_UNAUTHORIZED || request.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND) {
+            if (request.getResponseCode() == HttpURLConnection.HTTP_UNAUTHORIZED || request.getResponseCode() == HttpURLConnection.HTTP_FORBIDDEN) {
                 throw new TokenFailureException("the provided token is invalid");
             }
 

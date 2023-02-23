@@ -9,8 +9,8 @@ public class Transaction {
     public String email;
     public String gateway;
     public String valor;
-    public short status;
-    public boolean entregue;
+    public int status;
+    public int entregue;
     public String hex_transacao;
     public String external_reference;
     public Product[] produtos;

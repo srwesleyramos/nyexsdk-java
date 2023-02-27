@@ -1,4 +1,4 @@
-package br.com.nyexgaming.sdk.endpoints.products;
+package br.com.nyexgaming.sdk.models.products;
 
 public class ProductCommand {
 

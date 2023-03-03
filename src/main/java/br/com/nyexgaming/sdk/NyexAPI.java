@@ -1,56 +1,48 @@
 package br.com.nyexgaming.sdk;
 
+import br.com.nyexgaming.sdk.client.http.HTTPClient;
+import br.com.nyexgaming.sdk.data.adapter.purchase.PurchaseAdapter;
 import br.com.nyexgaming.sdk.data.errors.NetworkErrorException;
 import br.com.nyexgaming.sdk.data.errors.RequestFailedException;
 import br.com.nyexgaming.sdk.data.errors.TokenFailureException;
 import br.com.nyexgaming.sdk.data.models.purchase.Purchase;
 import br.com.nyexgaming.sdk.data.models.purchase.PurchaseStatus;
-import br.com.nyexgaming.sdk.http.HTTPUtils;
-import com.google.gson.Gson;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class NyexAPI {
 
-    private final HTTPUtils http;
+    private final HTTPClient http;
 
     public NyexAPI(String storeId, String serverId) {
-        this.http = new HTTPUtils(storeId, serverId);
+        this.http = new HTTPClient(storeId, serverId);
     }
 
     public Purchase[] getTransactions() throws NetworkErrorException, RequestFailedException, TokenFailureException {
-        String content = this.http.GET("ps/transacoes/");
-
-        return new Gson().fromJson(content, Purchase[].class);
+        return PurchaseAdapter.read(new JSONArray(this.http.GET("/ps/transacoes/")));
     }
 
-    public Purchase getTransactionById(long productId) throws NetworkErrorException, RequestFailedException, TokenFailureException {
-        String content = this.http.GET("ps/transacoes/" + productId);
-
-        return new Gson().fromJson(content, Purchase.class);
+    public Purchase getTransactionById(long transactionId) throws NetworkErrorException, RequestFailedException, TokenFailureException {
+        return PurchaseAdapter.read(new JSONObject(this.http.GET("/ps/transacoes/" + transactionId)));
     }
 
     public Purchase[] getTransactionsByProduct(long productId) throws NetworkErrorException, RequestFailedException, TokenFailureException {
-        String content = this.http.GET("ps/transacoes/p/" + productId);
-
-        return new Gson().fromJson(content, Purchase[].class);
+        return PurchaseAdapter.read(new JSONArray(this.http.GET("/ps/transacoes/p/" + productId)));
     }
 
     public Purchase[] getTransactionsByStatus(PurchaseStatus status) throws NetworkErrorException, RequestFailedException, TokenFailureException {
-        String content = this.http.GET("ps/transacoes/s/" + status.statusCode);
-
-        return new Gson().fromJson(content, Purchase[].class);
+        return PurchaseAdapter.read(new JSONArray(this.http.GET("/ps/transacoes/s/" + status.statusCode)));
     }
 
-    public Purchase[] getTransactionsByUser(String id) throws NetworkErrorException, RequestFailedException, TokenFailureException {
-        String content = this.http.GET("ps/transacoes/u/" + id);
-
-        return new Gson().fromJson(content, Purchase[].class);
+    public Purchase[] getTransactionsByUser(String user) throws NetworkErrorException, RequestFailedException, TokenFailureException {
+        return PurchaseAdapter.read(new JSONArray(this.http.GET("/ps/transacoes/u/" + user)));
     }
 
     public String update(Purchase purchase) throws NetworkErrorException, RequestFailedException, TokenFailureException {
-        return this.http.POST("ps/transacoes/" + purchase.id_transacao, new Gson().toJson(purchase));
+        return this.http.POST("ps/transacoes/" + purchase.id_transacao(), PurchaseAdapter.write(purchase).toString());
     }
 
-    public HTTPUtils getHttp() {
-        return http;
+    public HTTPClient getHttpClient() {
+        return this.http;
     }
 }

@@ -1,20 +1,21 @@
-package br.com.nyexgaming.sdk.http;
+package br.com.nyexgaming.sdk.client.http;
 
 import br.com.nyexgaming.sdk.data.errors.NetworkErrorException;
 import br.com.nyexgaming.sdk.data.errors.RequestFailedException;
 import br.com.nyexgaming.sdk.data.errors.TokenFailureException;
+import org.json.JSONObject;
 
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.stream.Collectors;
 
-public class HTTPUtils {
+public class HTTPClient {
 
-    private final String API_PREFIX = "https://api.nyexgaming.com.br/v1/";
+    private final String API_PREFIX = "https://api.nyexgaming.com.br/v1";
     private final String storeId, serverId;
 
-    public HTTPUtils(String storeId, String serverId) {
+    public HTTPClient(String storeId, String serverId) {
         this.storeId = "Bearer " + storeId;
         this.serverId = "Bearer " + serverId;
     }
@@ -33,13 +34,13 @@ public class HTTPUtils {
                 return getResponseContent(request.getInputStream());
             }
 
-            JsonObject statusBody = new Gson().fromJson(getResponseContent(request.getErrorStream()), JsonObject.class);
+            JSONObject object = new JSONObject(getResponseContent(request.getErrorStream()));
 
             if (statusCode == HttpURLConnection.HTTP_UNAUTHORIZED || statusCode == HttpURLConnection.HTTP_FORBIDDEN) {
-                throw new TokenFailureException(statusBody.get("message").getAsString());
+                throw new TokenFailureException(object.getString("message"));
             }
 
-            throw new RequestFailedException(statusCode, statusBody.get("message").getAsString());
+            throw new RequestFailedException(statusCode, object.getString("message"));
         } catch (IOException e) {
             throw new NetworkErrorException("Não foi possível estabelecer uma conexão com a Internet. Verifique sua conexão de rede e tente novamente.");
         }
@@ -65,13 +66,13 @@ public class HTTPUtils {
                 return getResponseContent(request.getInputStream());
             }
 
-            JsonObject statusBody = new Gson().fromJson(getResponseContent(request.getErrorStream()), JsonObject.class);
+            JSONObject object = new JSONObject(getResponseContent(request.getErrorStream()));
 
             if (statusCode == HttpURLConnection.HTTP_UNAUTHORIZED || statusCode == HttpURLConnection.HTTP_FORBIDDEN) {
-                throw new TokenFailureException(statusBody.get("message").getAsString());
+                throw new TokenFailureException(object.getString("message"));
             }
 
-            throw new RequestFailedException(statusCode, statusBody.get("message").getAsString());
+            throw new RequestFailedException(statusCode, object.getString("message"));
         } catch (IOException e) {
             throw new NetworkErrorException("Não foi possível estabelecer uma conexão com a Internet. Verifique sua conexão de rede e tente novamente.");
         }

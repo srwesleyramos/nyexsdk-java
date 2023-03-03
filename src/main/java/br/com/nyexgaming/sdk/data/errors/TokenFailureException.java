@@ -1,4 +1,4 @@
-package br.com.nyexgaming.sdk.utils.exceptions;
+package br.com.nyexgaming.sdk.data.errors;
 
 public class TokenFailureException extends Exception {
 

@@ -1,10 +1,8 @@
-package br.com.nyexgaming.sdk.utils;
+package br.com.nyexgaming.sdk.http;
 
-import br.com.nyexgaming.sdk.utils.exceptions.NetworkErrorException;
-import br.com.nyexgaming.sdk.utils.exceptions.RequestFailedException;
-import br.com.nyexgaming.sdk.utils.exceptions.TokenFailureException;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+import br.com.nyexgaming.sdk.data.errors.NetworkErrorException;
+import br.com.nyexgaming.sdk.data.errors.RequestFailedException;
+import br.com.nyexgaming.sdk.data.errors.TokenFailureException;
 
 import java.io.*;
 import java.net.HttpURLConnection;

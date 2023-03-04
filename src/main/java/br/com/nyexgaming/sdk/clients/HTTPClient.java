@@ -1,8 +1,8 @@
-package br.com.nyexgaming.sdk.utils;
+package br.com.nyexgaming.sdk.clients;
 
-import br.com.nyexgaming.sdk.data.errors.NetworkErrorException;
-import br.com.nyexgaming.sdk.data.errors.RequestFailedException;
-import br.com.nyexgaming.sdk.data.errors.TokenFailureException;
+import br.com.nyexgaming.sdk.errors.NetworkErrorException;
+import br.com.nyexgaming.sdk.errors.RequestFailedException;
+import br.com.nyexgaming.sdk.errors.TokenFailureException;
 import org.json.JSONObject;
 
 import java.io.*;

@@ -1,8 +1,8 @@
 import br.com.nyexgaming.sdk.NyexAPI;
-import br.com.nyexgaming.sdk.data.errors.NetworkErrorException;
-import br.com.nyexgaming.sdk.data.errors.RequestFailedException;
-import br.com.nyexgaming.sdk.data.errors.TokenFailureException;
-import br.com.nyexgaming.sdk.data.models.purchase.Purchase;
+import br.com.nyexgaming.sdk.errors.NetworkErrorException;
+import br.com.nyexgaming.sdk.errors.RequestFailedException;
+import br.com.nyexgaming.sdk.errors.TokenFailureException;
+import br.com.nyexgaming.sdk.models.purchase.Purchase;
 
 public class ClientTest {
 

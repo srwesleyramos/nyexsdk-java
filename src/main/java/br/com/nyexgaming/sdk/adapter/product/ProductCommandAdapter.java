@@ -1,7 +1,7 @@
-package br.com.nyexgaming.sdk.data.adapter.product;
+package br.com.nyexgaming.sdk.adapter.product;
 
-import br.com.nyexgaming.sdk.data.models.product.ProductCommand;
-import br.com.nyexgaming.sdk.data.models.product.ProductCommandType;
+import br.com.nyexgaming.sdk.models.product.ProductCommand;
+import br.com.nyexgaming.sdk.models.product.ProductCommandType;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

@@ -1,4 +1,4 @@
-package br.com.nyexgaming.sdk.data.models.purchase;
+package br.com.nyexgaming.sdk.models.purchase;
 
 import java.util.Arrays;
 

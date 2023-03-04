@@ -1,6 +1,6 @@
-package br.com.nyexgaming.sdk.data.adapter.category;
+package br.com.nyexgaming.sdk.adapter.category;
 
-import br.com.nyexgaming.sdk.data.models.category.Category;
+import br.com.nyexgaming.sdk.models.category.Category;
 import org.json.JSONObject;
 
 import java.time.Instant;

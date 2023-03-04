@@ -1,13 +1,13 @@
 package br.com.nyexgaming.sdk;
 
-import br.com.nyexgaming.sdk.utils.HTTPClient;
-import br.com.nyexgaming.sdk.data.adapter.purchase.PurchaseAdapter;
-import br.com.nyexgaming.sdk.data.errors.NetworkErrorException;
-import br.com.nyexgaming.sdk.data.errors.RequestFailedException;
-import br.com.nyexgaming.sdk.data.errors.TokenFailureException;
-import br.com.nyexgaming.sdk.data.models.purchase.Purchase;
-import br.com.nyexgaming.sdk.data.models.purchase.PurchaseStatus;
-import br.com.nyexgaming.sdk.utils.WebSocket;
+import br.com.nyexgaming.sdk.clients.HTTPClient;
+import br.com.nyexgaming.sdk.adapter.purchase.PurchaseAdapter;
+import br.com.nyexgaming.sdk.errors.NetworkErrorException;
+import br.com.nyexgaming.sdk.errors.RequestFailedException;
+import br.com.nyexgaming.sdk.errors.TokenFailureException;
+import br.com.nyexgaming.sdk.models.purchase.Purchase;
+import br.com.nyexgaming.sdk.models.purchase.PurchaseStatus;
+import br.com.nyexgaming.sdk.clients.WebSocket;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

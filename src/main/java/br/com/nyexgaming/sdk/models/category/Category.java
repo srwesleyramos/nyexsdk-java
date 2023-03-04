@@ -1,4 +1,4 @@
-package br.com.nyexgaming.sdk.data.models.category;
+package br.com.nyexgaming.sdk.models.category;
 
 public class Category {
 

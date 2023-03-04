@@ -1,4 +1,4 @@
-package br.com.nyexgaming.sdk.utils;
+package br.com.nyexgaming.sdk.clients;
 
 import jakarta.websocket.*;
 import org.json.JSONObject;

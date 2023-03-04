@@ -1,9 +1,9 @@
-package br.com.nyexgaming.sdk.data.adapter.purchase;
+package br.com.nyexgaming.sdk.adapter.purchase;
 
-import br.com.nyexgaming.sdk.data.adapter.product.ProductAdapter;
-import br.com.nyexgaming.sdk.data.models.purchase.Purchase;
-import br.com.nyexgaming.sdk.data.models.purchase.PurchaseDelivery;
-import br.com.nyexgaming.sdk.data.models.purchase.PurchaseStatus;
+import br.com.nyexgaming.sdk.adapter.product.ProductAdapter;
+import br.com.nyexgaming.sdk.models.purchase.Purchase;
+import br.com.nyexgaming.sdk.models.purchase.PurchaseDelivery;
+import br.com.nyexgaming.sdk.models.purchase.PurchaseStatus;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

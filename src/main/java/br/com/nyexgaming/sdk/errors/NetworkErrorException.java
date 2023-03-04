@@ -1,4 +1,4 @@
-package br.com.nyexgaming.sdk.data.errors;
+package br.com.nyexgaming.sdk.errors;
 
 public class NetworkErrorException extends Exception {
 

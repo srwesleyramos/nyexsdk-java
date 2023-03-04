@@ -1,4 +1,4 @@
-package br.com.nyexgaming.sdk.client.http;
+package br.com.nyexgaming.sdk.utils;
 
 import br.com.nyexgaming.sdk.data.errors.NetworkErrorException;
 import br.com.nyexgaming.sdk.data.errors.RequestFailedException;

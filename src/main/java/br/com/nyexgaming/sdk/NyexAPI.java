@@ -1,21 +1,24 @@
 package br.com.nyexgaming.sdk;
 
-import br.com.nyexgaming.sdk.client.http.HTTPClient;
+import br.com.nyexgaming.sdk.utils.HTTPClient;
 import br.com.nyexgaming.sdk.data.adapter.purchase.PurchaseAdapter;
 import br.com.nyexgaming.sdk.data.errors.NetworkErrorException;
 import br.com.nyexgaming.sdk.data.errors.RequestFailedException;
 import br.com.nyexgaming.sdk.data.errors.TokenFailureException;
 import br.com.nyexgaming.sdk.data.models.purchase.Purchase;
 import br.com.nyexgaming.sdk.data.models.purchase.PurchaseStatus;
+import br.com.nyexgaming.sdk.utils.WebSocket;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class NyexAPI {
 
     private final HTTPClient http;
+    private final WebSocket socket;
 
     public NyexAPI(String storeId, String serverId) {
         this.http = new HTTPClient(storeId, serverId);
+        this.socket = new WebSocket(storeId, serverId);
     }
 
     public Purchase[] getTransactions() throws NetworkErrorException, RequestFailedException, TokenFailureException {
@@ -44,5 +47,9 @@ public class NyexAPI {
 
     public HTTPClient getHttpClient() {
         return this.http;
+    }
+
+    public WebSocket getWebSocketClient() {
+        return this.socket;
     }
 }

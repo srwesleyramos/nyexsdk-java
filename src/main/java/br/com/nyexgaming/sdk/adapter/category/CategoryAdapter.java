@@ -1,11 +1,22 @@
 package br.com.nyexgaming.sdk.adapter.category;
 
 import br.com.nyexgaming.sdk.models.category.Category;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.time.Instant;
 
 public class CategoryAdapter {
+
+    public static Category[] read(JSONArray objects) {
+        Category[] categories = new Category[objects.length()];
+
+        for (int i = 0; i < categories.length; i++) {
+            categories[i] = read(objects.getJSONObject(i));
+        }
+
+        return categories;
+    }
 
     public static Category read(JSONObject object) {
         return new Category(
@@ -20,6 +31,16 @@ public class CategoryAdapter {
                 Instant.parse(object.getString("criado_em")).toEpochMilli(),
                 Instant.parse(object.getString("atualizado_em")).toEpochMilli()
         );
+    }
+
+    public static JSONArray write(Category[] categories) {
+        JSONArray objects = new JSONArray();
+
+        for (Category category : categories) {
+            objects.put(write(category));
+        }
+
+        return objects;
     }
 
     public static JSONObject write(Category category) {

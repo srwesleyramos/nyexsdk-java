@@ -1,4 +1,4 @@
-package br.com.nyexgaming.sdk.clients;
+package br.com.nyexgaming.sdk.clients.http;
 
 import br.com.nyexgaming.sdk.errors.NetworkErrorException;
 import br.com.nyexgaming.sdk.errors.RequestFailedException;
@@ -10,12 +10,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.stream.Collectors;
 
-public class HTTPClient {
+public class HTTP {
 
-    private final String API_PREFIX = "https://api.nyexgaming.com.br/v1";
+    private final String API_PREFIX = "https://api.nyexgaming.com.br";
     private final String storeId, serverId;
 
-    public HTTPClient(String storeId, String serverId) {
+    public HTTP(String storeId, String serverId) {
         this.storeId = "Bearer " + storeId;
         this.serverId = "Bearer " + serverId;
     }

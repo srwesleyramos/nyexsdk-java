@@ -1,5 +1,6 @@
 package br.com.nyexgaming.sdk.clients.ws;
 
+import jakarta.websocket.CloseReason;
 import org.json.JSONObject;
 
 public class WebSocketHandler {
@@ -8,11 +9,11 @@ public class WebSocketHandler {
 
     }
 
-    public void handleClose() {
+    public void handleClose(CloseReason reason) {
 
     }
 
-    public void handleMessage(JSONObject message) {
+    public void handleMessage(String event, JSONObject data) {
 
     }
 

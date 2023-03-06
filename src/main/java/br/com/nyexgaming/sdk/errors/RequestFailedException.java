@@ -2,7 +2,11 @@ package br.com.nyexgaming.sdk.errors;
 
 public class RequestFailedException extends Exception {
 
-    private final int statusCode;
+    private int statusCode;
+
+    public RequestFailedException(String message, Throwable cause) {
+        super(message, cause);
+    }
 
     public RequestFailedException(int statusCode, String message) {
         super(message + " (" + statusCode + ")");

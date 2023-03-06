@@ -2,63 +2,41 @@ package br.com.nyexgaming.sdk;
 
 import br.com.nyexgaming.sdk.clients.ws.WebSocket;
 import br.com.nyexgaming.sdk.clients.ws.WebSocketConfig;
-import br.com.nyexgaming.sdk.clients.ws.WebSocketHandler;
-import jakarta.websocket.DeploymentException;
+import br.com.nyexgaming.sdk.errors.NetworkErrorException;
+import br.com.nyexgaming.sdk.errors.RequestFailedException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.HashSet;
-import java.util.Set;
-
-public class NyexWS extends WebSocketHandler {
-
-    // TODO: trocar p WebSocketHandler para um próprio que contenha os eventos da Nyex.
-    private final Set<WebSocketHandler> handlers = new HashSet<>();
+public class NyexWS {
 
     private final WebSocket ws;
 
     public NyexWS(String storeId, String serverId) {
-        this.ws = new WebSocket(new WebSocketConfig(storeId, serverId), this);
+        this.ws = new WebSocket(new WebSocketConfig(storeId, serverId), null);
+    }
 
-        try {
-            this.ws.connect();
-        } catch (DeploymentException | IOException | URISyntaxException e) {
-            throw new RuntimeException(e);
+    public void connect(Game game) throws NetworkErrorException, RequestFailedException {
+        this.ws.connect();
+        this.ws.send(new JSONObject().put("subscribe", game.event()));
+    }
+
+    public void disconnect() throws RequestFailedException {
+        this.ws.disconnect();
+    }
+
+    // TODO: handler of messages
+    // TODO: 1. nyex::connect
+
+    public enum Game {
+        FIVEM("nyex::fivem::execute::event"), MINECRAFT("nyex::minecraft::execute::event");
+
+        private final String event;
+
+        Game(String event) {
+            this.event = event;
         }
-    }
 
-    public void addHandler(WebSocketHandler handler) {
-        handlers.add(handler);
-    }
-
-    public void removeHandler(WebSocketHandler handler) {
-        handlers.remove(handler);
-    }
-
-    @Override
-    public void handleOpen() {
-        handlers.forEach(WebSocketHandler::handleOpen);
-    }
-
-    @Override
-    public void handleClose() {
-        handlers.forEach(WebSocketHandler::handleClose);
-    }
-
-    @Override
-    public void handleMessage(JSONObject message) {
-        // TODO: nyex::connect event
-
-        handlers.forEach(handler -> handler.handleMessage(message));
-    }
-
-    @Override
-    public void handleError(Throwable throwable) {
-        // TODO: lidar com os erros
-    }
-
-    public WebSocket getWebSocketClient() {
-        return this.ws;
+        public String event() {
+            return event;
+        }
     }
 }

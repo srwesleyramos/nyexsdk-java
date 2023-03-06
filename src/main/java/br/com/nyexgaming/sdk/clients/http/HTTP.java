@@ -12,7 +12,8 @@ import java.util.stream.Collectors;
 
 public class HTTP {
 
-    private final String API_PREFIX = "https://api.nyexgaming.com.br";
+    private static final String API_PREFIX = "https://api.nyexgaming.com.br";
+
     private final String storeId, serverId;
 
     public HTTP(String storeId, String serverId) {
@@ -28,19 +29,7 @@ public class HTTP {
             request.setRequestProperty("store-id-authorization", this.storeId);
             request.setRequestProperty("server-id-authorization", this.serverId);
 
-            int statusCode = request.getResponseCode();
-
-            if (statusCode == HttpURLConnection.HTTP_OK || statusCode == HttpURLConnection.HTTP_ACCEPTED) {
-                return getResponseContent(request.getInputStream());
-            }
-
-            JSONObject object = new JSONObject(getResponseContent(request.getErrorStream()));
-
-            if (statusCode == HttpURLConnection.HTTP_UNAUTHORIZED || statusCode == HttpURLConnection.HTTP_FORBIDDEN) {
-                throw new TokenFailureException(object.getString("message"));
-            }
-
-            throw new RequestFailedException(statusCode, object.getString("message"));
+            return getResponse(request);
         } catch (IOException e) {
             throw new NetworkErrorException("Não foi possível estabelecer uma conexão com a Internet. Verifique sua conexão de rede e tente novamente.");
         }
@@ -60,22 +49,26 @@ public class HTTP {
                 writer.write(content);
             }
 
-            int statusCode = request.getResponseCode();
-
-            if (statusCode == HttpURLConnection.HTTP_OK || statusCode == HttpURLConnection.HTTP_CREATED) {
-                return getResponseContent(request.getInputStream());
-            }
-
-            JSONObject object = new JSONObject(getResponseContent(request.getErrorStream()));
-
-            if (statusCode == HttpURLConnection.HTTP_UNAUTHORIZED || statusCode == HttpURLConnection.HTTP_FORBIDDEN) {
-                throw new TokenFailureException(object.getString("message"));
-            }
-
-            throw new RequestFailedException(statusCode, object.getString("message"));
+            return getResponse(request);
         } catch (IOException e) {
             throw new NetworkErrorException("Não foi possível estabelecer uma conexão com a Internet. Verifique sua conexão de rede e tente novamente.");
         }
+    }
+
+    public String getResponse(HttpURLConnection request) throws TokenFailureException, RequestFailedException, IOException {
+        int statusCode = request.getResponseCode();
+
+        if (statusCode == HttpURLConnection.HTTP_OK || statusCode == HttpURLConnection.HTTP_CREATED) {
+            return getResponseContent(request.getInputStream());
+        }
+
+        JSONObject object = new JSONObject(getResponseContent(request.getErrorStream()));
+
+        if (statusCode == HttpURLConnection.HTTP_UNAUTHORIZED || statusCode == HttpURLConnection.HTTP_FORBIDDEN) {
+            throw new TokenFailureException(object.getString("message"));
+        }
+
+        throw new RequestFailedException(statusCode, object.getString("message"));
     }
 
     public String getResponseContent(InputStream inputStream) {

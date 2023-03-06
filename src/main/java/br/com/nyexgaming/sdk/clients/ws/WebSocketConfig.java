@@ -25,12 +25,4 @@ public class WebSocketConfig extends ClientEndpointConfig.Configurator {
     public ClientEndpointConfig build() {
         return ClientEndpointConfig.Builder.create().configurator(this).build();
     }
-
-    public String storeId() {
-        return storeId;
-    }
-
-    public String serverId() {
-        return serverId;
-    }
 }

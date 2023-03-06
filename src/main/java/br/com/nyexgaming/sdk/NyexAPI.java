@@ -1,16 +1,16 @@
 package br.com.nyexgaming.sdk;
 
-import br.com.nyexgaming.sdk.adapter.category.CategoryAdapter;
-import br.com.nyexgaming.sdk.adapter.product.ProductAdapter;
-import br.com.nyexgaming.sdk.adapter.purchase.PurchaseAdapter;
 import br.com.nyexgaming.sdk.clients.http.HTTP;
+import br.com.nyexgaming.sdk.data.adapter.category.CategoryAdapter;
+import br.com.nyexgaming.sdk.data.adapter.product.ProductAdapter;
+import br.com.nyexgaming.sdk.data.adapter.purchase.PurchaseAdapter;
+import br.com.nyexgaming.sdk.data.models.category.Category;
+import br.com.nyexgaming.sdk.data.models.product.Product;
+import br.com.nyexgaming.sdk.data.models.purchase.Purchase;
+import br.com.nyexgaming.sdk.data.models.purchase.PurchaseStatus;
 import br.com.nyexgaming.sdk.errors.NetworkErrorException;
 import br.com.nyexgaming.sdk.errors.RequestFailedException;
 import br.com.nyexgaming.sdk.errors.TokenFailureException;
-import br.com.nyexgaming.sdk.models.category.Category;
-import br.com.nyexgaming.sdk.models.product.Product;
-import br.com.nyexgaming.sdk.models.purchase.Purchase;
-import br.com.nyexgaming.sdk.models.purchase.PurchaseStatus;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

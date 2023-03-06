@@ -1,6 +1,6 @@
-package br.com.nyexgaming.sdk.models.purchase;
+package br.com.nyexgaming.sdk.data.models.purchase;
 
-import br.com.nyexgaming.sdk.models.product.Product;
+import br.com.nyexgaming.sdk.data.models.product.Product;
 
 public class Purchase {
 
